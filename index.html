@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Application Security</title>
+
+		<meta name="description" content="What is web application security about and how can OWASP help?">
+		<meta name="author" content="Marek Puchalski">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="css/own.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+<!-- 01 -->
+			<div class="slides">
+				<section>
+					<h1>Web Application Security</h1>
+					<p>
+						<small><a href="mailto:marek.puchalski@capgemini.com">marek.puchalski@capgemini.com</a></small>
+					</p>
+					<p>
+						<small>Poznań, 2015-01-21</small>
+					</p>
+				</section>
+<!-- 02 -->
+				<section>
+					<h2>Who am I?</h2>
+					<p>
+						<img src="img/me.png"/>
+					</p>
+					<p class="mid"><small>business architect @ Capgemini, 8 years automotive, security maniac</small></p>
+				</section>
+
+
+				<section>
+<!-- 03 -->
+				<section>
+						<h2>What is AppSec?</h2>
+						<p><b>Application security (AppSec)</b> is the use of software, hardware, and procedural 
+				methods to assure <b>availability</b>, <b>confidentiality</b> and <b>consistency</b> of the 
+				data <b>processed</b>, <b>transmitted</b> and <b>stored</b> by the application.</p>
+				</section>
+<!-- 04 -->
+				<section data-background="img/iceberg.jpg">
+	
+				    <h2 style="color:#ffffff">You can't see <div style="opacity:0.2">security</div></h2>
+						
+				</section>
+<!-- 05 -->
+				<section>
+						
+						<h2>Yet still, security costs</h2>
+						<img src="img/coins.png"/>
+					
+				</section>
+<!-- 06 -->
+  			<section data-background="img/fire.png">
+
+						<h2 style="color:#ffffff">Costs of failure are</h2>
+						<h1 style="color:#ffffff">HUGE</h1>
+					
+				</section>
+				</section>
+<!-- 07 -->
+				<section>
+					<h2>Be aware</h2>
+					<img src="img/zen_circle.png"/>
+					<p>
+						of weaknesses <strike>and mitigation techniques</strike> (not today)
+					</p>
+				</section>
+<!-- 08 -->
+				<section>
+					<h2>Table of contents</h2>
+					<p>OWASP</p>
+					<p>OWASP Top 10 2013</p>
+					<p>Learning AppSec</p>
+				</section>
+<!-- 09 -->
+				<section>
+					<img src="img/owasp.png"/>
+					<table>
+					  <tr><td>Mission:</td><td>improving web application security</td></tr>
+					  <tr><td>Audience:</td><td>developers, managers, testers, consultants</td></tr>
+					  <tr><td>Products:</td><td>tools, guides, standards, libraries, checklists, tutorials…</td></tr>
+					</table>
+					<p><small><a href="https://www.owasp.org/">https://www.owasp.org/</a></small></p>
+				</section>
+<!-- 10 -->
+				<section>
+				  <section>
+					<h2>OWASP Top 10 2013</h2>
+					<ul>
+					  <li>List of 10 <b>most common</b> security problems in web applications (NOTE: most common != most dangerous)</li>
+					  <li>New releases every 3 years (2004, 2007, 2010, 2013)</li>
+					  <li><b>DO</b>: Use the list to quickly dive into AppSec</li>
+					  <li><b>DON’T</b>: It’s not an auditing standard, pentest scenario or development checklist</li>
+					</ul>
+					<p><small><a href="https://www.owasp.org/index.php/Top_10_2013-Top_10">https://www.owasp.org/index.php/Top_10_2013-Top_10</a></small></p>
+				  </section>
+<!-- 11 -->
+				  <section>
+				    <img src="img/imperva.jpg"/>
+				  </section>
+<!-- 12 -->
+				  <section data-background="img/jail.jpg">
+  				  <p style="color:#ffffff"><small>
+  						Before we start one last bit of
+  					</small></p>
+  					<h2 style="color:#ffffff">Warning</h2>
+  					<p style="color:#ffffff">
+  						Unauthorized pentest is a bad idea.
+  					</p>
+  					<p style="color:#ffffff">
+  					  Be careful even when reporting security bugs.
+  					</p>
+  					<p><small>
+  					</br></br>
+  					<a href="http://prawo.vagla.pl/node/8154">http://prawo.vagla.pl/node/8154</a></br>
+  					<a href="http://niebezpiecznik.pl/post/glebokie-ukrycie-danych-w-pko-bp/ ">http://niebezpiecznik.pl/post/glebokie-ukrycie-danych-w-pko-bp/</a></br>
+            <a href="http://niebezpiecznik.pl/post/zatrzymala-go-policja-bo-zglosil-blad-na-stronie-urzedu-wojewodzkiego/">http://niebezpiecznik.pl/post/zatrzymala-go-policja-bo-zglosil-blad-na-stronie-urzedu-wojewodzkiego/</a>
+  					</small></p>
+  				</section>
+				</section>
+
+        <section>
+<!-- 12 -->
+  				<section>
+  					<h2>A1 - Injection</h2>
+  					<img src="img/a1_injection.png"/>
+  					<p>When you let the user run HIS commands on YOUR server.</p>
+  					<p>It's not only a web application issue.</p>
+  				</section>
+<!-- 13 -->
+  			  <section>
+  			    <h2>Injection examples</h2>
+  			    <p>Command injection</p>
+  			    <pre><code data-trim contenteditable>
+Runtime runtime = Runtime.getRuntime();
+Process proc = runtime.exec("find . -name " + param);
+					  </code></pre>
+					  </br>
+					  <p>SQL injection</p>
+					  <pre><code data-trim contenteditable>
+Runtime runtime = Runtime.getRuntime();
+Process proc = runtime.exec("find . -name " + param);
+					  </code></pre>
+					  </br>
+					  <p>but there are also others (HQL, LDAP, XPath, XML, ...)
+  			  </section>
+  			  
+  			  <section>
+  			    
+  			  </section>
+			  </section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Write content using inline or external Markdown.
+						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment roll-in">roll-in</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment current-visible">current-visible</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) {
+        node.className += ' roll';
+      }
+    }
+  }
+}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+
+				<section>
+					<h2>Marvelous List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							<tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							<tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							<tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
+					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p>
+				</section>
+
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="http://slides.com">Try the online editor</a> <br>
+						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
