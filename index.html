@@ -152,14 +152,14 @@
 				</section>
 
         <section>
-<!-- 12 -->
+<!-- 13 -->
   				<section>
-  					<h2>A1 - Injection</h2>
+  					<h2>A1-Injection</h2>
   					<img src="img/a1_injection.png"/>
   					<p>When you let the user run HIS commands on YOUR server.</p>
   					<p>It's not only a web application issue.</p>
   				</section>
-<!-- 13 -->
+<!-- 14 -->
   			  <section>
   			    <h2>Injection examples</h2>
   			    <p>Command injection</p>
@@ -176,30 +176,57 @@ Process proc = runtime.exec("find . -name " + param);
 					  </br>
 					  <p>but there are also others (HQL, LDAP, XPath, XML, ...)
   			  </section>
-  			  
+<!-- 15 -->
   			  <section>
-  			    
+  			    <h2>Be aware</h2>
+  			    <p>Injection vulnerabilities occur by concatenating <b>unvalidated user input</b> with applications queries/commands.</p>
+  			  </section>
+<!-- 16 -->
+  			  <section>
+  			    <h2>SQL injection types</h2>
+  			    <p>OR 1=1 (bypass the where conditions)</p>
+  			    <pre><code data-trim>
+"select * from users where name = '" + user + "' and password = '" + password + "'"
+// attack vector: user = sth' or '1'='1
+//            password = sth' or '1'='1
+					  </code></pre>
+					  <p>UNION SELECT (extract more data)</p>
+  			    <pre><code data-trim>
+"select content from data where id = " + param
+// attack vector: param = 21 union all select password from users
+					  </code></pre>
+  			    <p>run additional commands</p>
+  			    <pre><code data-trim>
+"select content from data where id = " + param
+// attack vector: param = 1; DROP DATABASE records--
+					  </code></pre>
+  			  </section>
+<!-- 17 -->
+  			  <section>
+  			    <img src="img/sqli_cap.png"/>
+  			    <p><small>More prominent examples: <a href="http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/">http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/</a></small></p>
   			  </section>
 			  </section>
 
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
+        <section>
+<!-- 18 -->
+  				<section>
+  					<h2>A2-Broken Authentication and Session Management</h2>
+  					<img src="img/a2_session.png"/>
+  					<p>Everything around the protection of user credentials and session IDs.</p>
+  				</section>
+<!-- 19 -->
+  				<section>
+  					<h2>Session management</h2>
+  					<img src="img/session.gif"/>
+  				  <p><small><a href="http://docstore.mik.ua/orelly/webprog/webdb/ch08_03.htm">http://docstore.mik.ua/orelly/webprog/webdb/ch08_03.htm</a></small></p>
+  				</section>
+<!-- 20 -->
+  				<section>
+  					<h2>Attacks on users session</h2>
+  					<img src="img/session.png"/>
+  				</section>
+  			</section>
 
 				<section>
 					<section id="fragments">
@@ -225,45 +252,6 @@ Process proc = runtime.exec("find . -name " + param);
 					</section>
 				</section>
 
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
 
 				<section>
 					<h2>Tabular Tables</h2>
