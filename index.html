@@ -227,6 +227,43 @@ Process proc = runtime.exec("find . -name " + param);
   					<img src="img/session.png"/>
   				</section>
   			</section>
+<!-- 21 -->
+        <section>
+          <section>
+            <h2>A3-Cross-Site Scripting (XSS)</h2>
+            <img src="img/a3_xss.png"/>
+            <p>When you let the user program your web server.</p>
+          </section>
+<!-- 22 -->
+          <section>
+  			    <h2>XSS examples</h2>
+  			    <p>XSS type 2, Reflected</p>
+  			    <pre><code data-trim>
+URL: http://www.vulnerable.site/search.html?param=&lt;script&gt;alert(1);&lt;/script&gt;
+
+Servlet: out.writeln("Search: " + request.getParameter("param"));
+					  </code></pre>
+  			  </section>
+<!-- 23 -->
+          <section>
+  			    <h2>XSS examples</h2>
+  			    <img src="img/xss1.png"/>
+  			  </section>
+<!-- 24 -->
+          <section>
+  			    <h2>XSS examples</h2>
+  			    <img src="img/xss2.png"/>
+  			    <small>
+  			    <p>Epic XSS fail: <a href="http://en.wikipedia.org/wiki/Samy_%28computer_worm%29">http://en.wikipedia.org/wiki/Samy_computer_worm</a></p>
+  			    <p>Other prominent fails: <a href="http://xssed.com/">http://xssed.com/</a></p>
+  			    </small>
+  			  </section>
+<!-- 25 -->
+  			  <section>
+  			    <h2>Be aware</h2>
+  			    <p>Dealing with XSS can be tricky. <a href="https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet">Be sure to sanitize your input depending on the context!</a></p>
+  			  </section>
+        </section>
 
 				<section>
 					<section id="fragments">
@@ -254,36 +291,6 @@ Process proc = runtime.exec("find . -name " + param);
 
 
 				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							<tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							<tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							<tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
 					<h2>Clever Quotes</h2>
 					<p>
 						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
@@ -293,14 +300,6 @@ Process proc = runtime.exec("find . -name " + param);
 						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
 						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
 					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
 				</section>
 
 				<section>
@@ -317,27 +316,6 @@ Process proc = runtime.exec("find . -name " + param);
 					<h2>Export to PDF</h2>
 					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
 					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
 				</section>
 
 				<section>
