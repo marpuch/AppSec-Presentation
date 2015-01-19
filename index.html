@@ -264,6 +264,60 @@ Servlet: out.writeln("Search: " + request.getParameter("param"));
   			    <p>Dealing with XSS can be tricky. <a href="https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet">Be sure to sanitize your input depending on the context!</a></p>
   			  </section>
         </section>
+<!-- 26 -->
+        <section>
+          <section>
+            <h2>A4-Insecure Direct Object References</h2>
+            <img src="img/a4_object.png"/>
+            <p>Problems creating a vulnerability if combined together: 
+              <ul>
+                <li>Insecure object reference (no access authorization checks performed)</li>
+                <li>Direct object reference (the parameter is simple to guess)</li>
+              </ul>
+            </p>
+          </section>
+<!-- 27 -->
+          <section>
+            <h2>Possible solution</h2>
+            <p>Using OWASP ESAPI</p>
+            <img src="img/a4_object1.png"/>
+            <p>http://www.ibank.com?file=my_excel.xls -> http://www.ibank.com?file=De4j5Ut98aWx</p>
+          </section>
+        </section>
+<!-- 28 -->
+        <section>
+          <section>
+            <h2>A7-Missing Function Level Access Control</h2>
+            <img src="img/a7_access.png"/>
+            <p>By changing HTTP requests the user can access pages or trigger actions he is not authorized for.</p>
+            <p>The admin can access http://example.com/adminConf.jsp. Can I?</p>
+          </section>
+<!-- 29 -->
+          <section>
+            <img src="img/a7_access1.png"/>
+          </section>
+        </section>
+<!-- 30 -->
+        <section>
+          <h2>A5-Security Misconfiguration</h2>
+          <img src="img/a5_misconf.png"/>
+          <p>Necessary hardening of application and any part of the application stack.</p>
+          <aside class="notes">
+							Insecure defaults, missing updates.
+					</aside>
+        </section>
+<!-- 31 -->
+        <section>
+          <h2>A6-Sensitive Data Exposure</h2>
+          <img src="img/a6_crypto.png"/>
+          <p>Typically one of following problems:
+            <ul><li>Insufficient SSL/TLS protection</li>
+              <li>Weak password hashing methods</li>
+              <li>Code weaknesses</li>
+              <li>Sensitive data management issues</li><ul></p>
+
+					</aside>
+        </section>
 
 				<section>
 					<section id="fragments">
