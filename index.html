@@ -170,8 +170,8 @@ Process proc = runtime.exec("find . -name " + param);
 					  </br>
 					  <p>SQL injection</p>
 					  <pre><code data-trim contenteditable>
-Runtime runtime = Runtime.getRuntime();
-Process proc = runtime.exec("find . -name " + param);
+http://...info.jsp?id=345
+statement.executeQuery("select * from infos where id = " + id);
 					  </code></pre>
 					  </br>
 					  <p>but there are also others (HQL, LDAP, XPath, XML, ...)
@@ -308,16 +308,53 @@ Servlet: out.writeln("Search: " + request.getParameter("param"));
         </section>
 <!-- 31 -->
         <section>
-          <h2>A6-Sensitive Data Exposure</h2>
-          <img src="img/a6_crypto.png"/>
-          <p>Typically one of following problems:
-            <ul><li>Insufficient SSL/TLS protection</li>
-              <li>Weak password hashing methods</li>
-              <li>Code weaknesses</li>
-              <li>Sensitive data management issues</li><ul></p>
-
-					</aside>
+          <h2>A9-Using Components with Known Vulnerabilities</h2>
+          <img src="img/a9_components.png"/>
+          <p>Am I using libraries with known (and most probably already fixed) security issues?</p>
+          <p>Check <a href="http://www.victi.ms/">Victims</a> and <a href="https://www.owasp.org/index.php/OWASP_Dependency_Check">OWASP Dependency-Check</a></p>
         </section>
+<!-- 32 -->
+        <section>
+          <section>
+            <h2>A6-Sensitive Data Exposure</h2>
+            <img src="img/a6_crypto.png"/>
+            <p>Typically one of following problems:
+              <ul><li>Insufficient SSL/TLS protection</li>
+                <li>Weak password hashing methods</li>
+                <li>Code weaknesses</li>
+                <li>Sensitive data management issues</li><ul></p>
+          </section>
+<!-- 33 -->
+          <section>
+            <h2>Be aware</h2>
+            <p>In crypto "learning by doing" leads to a disaster.</p>
+            <p>Learn before doing.</p>
+          </section>
+        </section>
+<!-- 34 -->
+        <section>
+          <h2>A8-Cross-Site Request Forgery (CSRF)</h2>
+          <img src="img/a8_csrf.png"/>
+          <ol><li>User is logged in to bank.com</li>
+              <li>In a new tab a page is opened with content including</li>
+              <pre><code data-trim contenteditable>
+<img src="http://bank.com/app/transferFunds?
+amount=1500&destinationAccount=attackersAcct#" width="0" height="0" />
+				  </code></pre>
+              <li>Guess the result</li>
+          <ol>
+        </section>
+<!-- 35 -->
+        <section>
+          <h2>A10-Unvalidated Redirects and Forwards</h2>
+          <img src="img/a10_redirect.png"/>
+          <p>The target URL is decided by the browser.</p>
+          <pre><code data-trim contenteditable>
+http://www.example.com/redirect.jsp?url=evil.com
+http://www.example.com/boring.jsp?fwd=admin.jsp
+				  </code></pre>
+        </section>
+
 
 				<section>
 					<section id="fragments">
